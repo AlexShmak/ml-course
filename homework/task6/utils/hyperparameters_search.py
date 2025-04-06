@@ -4,8 +4,8 @@ from itertools import product
 import numpy as np
 from matplotlib import pyplot as plt
 
-from howework.task6.utils.nn import NeuralNetwork
-from howework.task6.utils.optimizer import SGD, Momentum, Adam
+from homework.task6.utils.nn import NeuralNetwork
+from homework.task6.utils.optimizer import SGD, Momentum, Adam
 
 
 def grid_search_hyperparameters(X_train, y_train, X_test, y_test, classes_num, nn_model_factory):
@@ -21,7 +21,7 @@ def grid_search_hyperparameters(X_train, y_train, X_test, y_test, classes_num, n
 
     Returns:
     - best_params: Dictionary of best hyperparameters
-    - best_model: Trained model with best hyperparameters
+    - best_model: Trained model with the best hyperparameters
     - results: List of dictionaries with results for all parameter combinations
     """
     # Define hyperparameter grid including optimizer type
@@ -30,7 +30,7 @@ def grid_search_hyperparameters(X_train, y_train, X_test, y_test, classes_num, n
         'learning_rate': [0.001, 0.01, 0.1],
         'reg_strength': [1e-3, 1e-4, 1e-5],
         'batch_size': [16, 32, 64],
-        'epochs': [500],  # Fixed for grid search to save time
+        'epochs': [100],  # Fixed for grid search to save time
         'optimizer': ['SGD', 'Momentum', 'Adam']
     }
 
@@ -198,7 +198,7 @@ def visualize_best_model_training(model):
 
 
 # Example usage:
-def create_neural_network(input_size, hidden_size, output_size, reg_strength):
+def create_neural_network(input_size, hidden_size, output_size):
     """
     Factory function to create and configure a neural network.
 
@@ -211,11 +211,10 @@ def create_neural_network(input_size, hidden_size, output_size, reg_strength):
     Returns:
     - Configured NeuralNetwork instance
     """
-    from howework.task6.utils.layer import FullyConnected, ReLU, BatchNorm
+    from homework.task6.utils.layer import FullyConnected, ReLU, BatchNorm
 
     model = NeuralNetwork()
 
-    # Example structure: Input -> FC -> BatchNorm -> ReLU -> FC
     model.build(
         FullyConnected(input_size, hidden_size),
         ReLU(),
